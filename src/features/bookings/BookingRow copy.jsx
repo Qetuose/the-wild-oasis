@@ -17,7 +17,6 @@ import {
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../check-in-out/useCheckout";
-import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -68,7 +67,6 @@ function BookingRow({
 
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
-  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   return (
     <Table.Row>
@@ -122,17 +120,12 @@ function BookingRow({
                 Check out
               </Menus.Button>
             )}
-            <Modal.Open opens="delete">
-              <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
-            </Modal.Open>
+            <Modal.Open opens="delete" />
+            <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
           </Menus.List>
         </Menus.Menu>
         <Modal.Window name="delete">
-          <ConfirmDelete
-            resourceName="booking"
-            disabled={isDeleting}
-            onConfirm={() => deleteBooking(bookingId)}
-          />
+          <ConfirmDelete resourceName="booking" onConfirm={() => {}} />
         </Modal.Window>
       </Modal>
     </Table.Row>
